@@ -1,7 +1,7 @@
 <?php
 session_start();
-define('FACEBOOK_SDK_V4_SRC_DIR', '/home/daniel/projects/NewCuteDogCushion/facebook/php-sdk-v4/src/Facebook/');
-require __DIR__ . '/facebook/php-sdk-v4/autoload.php' ;
+define('FACEBOOK_SDK_V4_SRC_DIR', 'php-sdk-v4/src/Facebook/');
+require 'php-sdk-v4/autoload.php' ;
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
