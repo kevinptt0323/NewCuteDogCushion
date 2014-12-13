@@ -1,0 +1,51 @@
+<?php
+session_start();
+define('FACEBOOK_SDK_V4_SRC_DIR', '/home/daniel/projects/NewCuteDogCushion/facebook/php-sdk-v4/src/Facebook/');
+require __DIR__ . '/facebook/php-sdk-v4/autoload.php' ;
+
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+
+FacebookSession::setDefaultApplication('370119299832796','84b61fca561954af21e3c7b7faba135b');
+ $session = new FacebookSession('CAAFQnx1kG9wBAHxYxz81EuhRRcBmgc0VZCTh1grtskYKkAXYqybyzcbduQ8QG5ytutrvGYPlUdYS0L57fJCY57UYZBTmIZCglYitlwJeceetJ1RlxMYLFH0kNZBtu3d2UOOnzkfklZBdbz2CG0ZBWUXodJGR6ZBQ8h7gwwZC0SSEKhzQN81qpFQ6OHak584v2iNG9wFvSrdprXvUZCpWZC5eck');
+$result=array();
+$thumbnail=array();
+
+if($session) {
+
+  try {
+
+    $response=(new FacebookRequest(
+      $session, 'GET', '/me/photos?limit=999'
+    ))->execute();
+    //$object = $response->getGraphObject(GraphUser::className())->asArray();
+    $arrayResult = json_decode($response->getRawResponse(), true);
+    $arrayResult=$arrayResult['data'];
+    foreach($arrayResult as $row){
+        array_push($result,$row[images][0][source]);
+        array_push($thumbnail,$row[images][5][source]);
+    }
+
+
+  } catch(FacebookRequestException $e) {
+
+    echo "Exception occured, code: " . $e->getCode();
+    echo " with message: " . $e->getMessage();
+
+  }
+function result($data)
+{
+    echo json_encode($data);
+}
+function thumbnail($data)
+{
+    echo json_encode($data);
+}
+if(isset($_GET['result']))result($result);
+else if(isset($_GET['thumb']))thumbnail($thumbnail);
+
+}
+
+?>
