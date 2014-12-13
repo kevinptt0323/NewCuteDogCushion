@@ -1,3 +1,7 @@
+*::-moz-selection {
+	color: #fff;
+	background: #999;
+}
 body {
 }
 
