@@ -1,17 +1,20 @@
 var fb = {
-	url : new Array(),
+	username : "蔡維哲jizzz",
+	photos : { "raw" : new Array() },
 	login : function(username, password) {
 		console.log("fb login as " + username + "/" + password);
+		$("#fb-login .form").addClass("loading");
 		this.loginSucceed();
 	},
 	loginSucceed : function() {
 		console.log("fb login succeed");
-		$("#fb-login").html("Hello Kevin!");
+		$("#fb-login").html("Hello " + this.username + "!");
 		this.getPhoto();
+		$("#fb-login .form").removeClass("loading");
 	},
 	albumInit : function() {
-		for(i=1; i<=50; ++i) {
-			$("#fb-album").append("<div class=\"photo thumbnail\">" + i + "</div>");
+		for(i=0; i<this.photos["raw"].length; ++i) {
+			$("#fb-album").append("<div class=\"photo thumbnail\" style=\"background:url('" + this.photos["raw"][i]+ "')\">" + i + "</div>");
 		}
 	},
 	fadeIn : function(index) {
@@ -22,19 +25,18 @@ var fb = {
 	},
 	getPhoto : function() {
 		console.log("getPhoto");
+		obj = this;
 		$.ajax({
 			type: "GET",
 			url: "api/facebook/parser.php?result=1",
 			dataType: "json",
 			success: function(ret) {
-				alert("^^");
 				console.log("getPhoto success");
-				console.log(ret);
+				obj.photos["raw"] = ret;
+				obj.albumInit();
 			},
 			error: function(ret) {
-				alert("QQ");
 				console.log("getPhoto failed");
-				console.log(ret);
 			}
 		});
 	}
@@ -60,7 +62,6 @@ var nas = {
 	}
 };
 $(function() {
-	fb.albumInit();
 	$("#fb-login .submit").on('click', function() {
 		fb.login($("#fb-username").val(), $("#fb-password").val());
 	});
