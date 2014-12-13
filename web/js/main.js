@@ -23,6 +23,21 @@ var fb = {
 var nas = {
 	login : function(username, password) {
 		console.log("nas login as " + username + "/" + password);
+		$.ajax({
+			url: "api/nas/login.php",
+			type: "POST",
+			data: {"username": username, "password": password},
+			success: function(ret) {
+				console.log("success: " + ret);
+			},
+			error: function(ret) {
+				console.log("success: " + ret);
+			}
+		});
+	},
+	loginSucceed : function() {
+		console.log("fb login succeed");
+		$("#fb-login").html("Hello Kevin!");
 	}
 };
 $(function() {
