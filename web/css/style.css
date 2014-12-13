@@ -50,6 +50,7 @@ h5 { margin: 15px 0; }
 	overflow-y: auto;
 }
 #fb-album .photo.thumbnail {
+	position: relative;
 	float: left;
 	display: none;
 	min-width: 150px;
@@ -70,7 +71,21 @@ h5 { margin: 15px 0; }
 		-webkit-transition: -webkit-transform .2s ease-out; 
 }
 #fb-album .photo.thumbnail:hover {
+	z-index: 10;
+	opacity: 1;
 	transform: scale(1.4);
 		-webkit-transform: scale(1.4);
 	box-shadow: 0 0 10px #000;
+}
+
+#fb-album .photo.thumbnail:not(:hover)::after {
+	content: "";
+	background: #000;
+	opacity: 0.5;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: 5;
 }

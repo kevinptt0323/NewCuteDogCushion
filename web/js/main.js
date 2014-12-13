@@ -21,7 +21,7 @@ var fb = {
 	albumInit : function() {
 		var photos = this.data["photos"];
 		for(i=0; i<photos.length; ++i) {
-			$("#fb-album").append("<div class=\"photo thumbnail\" style=\"background-image:url('" + photos[i]["thumb"]+ "')\">" + i + "</div>");
+			$("#fb-album").append("<div class=\"photo thumbnail\" style=\"background-image:url('" + photos[i]["thumb"]+ "')\"></div>");
 		}
 	},
 	fadeIn : function(index) {
