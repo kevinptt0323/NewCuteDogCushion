@@ -1,4 +1,5 @@
 var fb = {
+	url : new Array(),
 	login : function(username, password) {
 		console.log("fb login as " + username + "/" + password);
 		this.loginSucceed();
@@ -6,6 +7,7 @@ var fb = {
 	loginSucceed : function() {
 		console.log("fb login succeed");
 		$("#fb-login").html("Hello Kevin!");
+		this.getPhoto();
 	},
 	albumInit : function() {
 		for(i=1; i<=50; ++i) {
@@ -14,10 +16,27 @@ var fb = {
 	},
 	fadeIn : function(index) {
 		fadeIn = this.fadeIn;
-		console.log(index);
 		if( index==$(".photo.thumbnail").length ) return;
 		$(".photo.thumbnail").eq(index).fadeIn(500);
 		setTimeout(function(){fadeIn(index+1)}, 10);
+	},
+	getPhoto : function() {
+		console.log("getPhoto");
+		$.ajax({
+			type: "GET",
+			url: "api/facebook/parser.php?result=1",
+			dataType: "json",
+			success: function(ret) {
+				alert("^^");
+				console.log("getPhoto success");
+				console.log(ret);
+			},
+			error: function(ret) {
+				alert("QQ");
+				console.log("getPhoto failed");
+				console.log(ret);
+			}
+		});
 	}
 };
 var nas = {
