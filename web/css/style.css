@@ -33,8 +33,9 @@ h5 { margin: 15px 0; }
 	color: #999;
 }
 
-#fb-login .button {
-	margin: 10px 0;
+#login-sec .form {
+	width: 400px;
+	margin: auto;
 }
 
 @media screen and (max-width: 767px) {
