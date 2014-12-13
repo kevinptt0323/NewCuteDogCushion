@@ -1,6 +1,11 @@
 var fb = {
 	login : function(username, password) {
 		console.log("fb login as " + username + "/" + password);
+		this.loginSucceed();
+	},
+	loginSucceed : function() {
+		console.log("fb login succeed");
+		$("#fb-login").html("Hello Kevin!");
 	},
 	albumInit : function() {
 		for(i=1; i<=50; ++i) {
