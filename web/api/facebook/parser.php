@@ -8,20 +8,24 @@ use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 
+if( !isset($_GET['token']) ) {
+  echo "{}";
+  die();
+}
+
 FacebookSession::setDefaultApplication('370119299832796','84b61fca561954af21e3c7b7faba135b');
- $session = new FacebookSession('CAAFQnx1kG9wBAEwoIc9VJONaS61De5VSnBHNbbZCBaTdSWSp4n0wutn8psUL8HcdRKhobXZAO59XZCeMZARAGJyWZC46am42fahdBfA78mxLFbQGyEZBY8juMLBagSTtEH9KkZCiOiwy47fb6H09JoZCHIC09fQmlxoVZAyUM7NdEUQR2JrZADrZAC7CjmsxJYP8jpEZAwUwxoWBHZAY9EUsO1NvL');
-$result = array(
-  "username"=>"蔡維哲jizz"
-);
+$session = new FacebookSession($_GET['token']);
+$result = array();
 
 if($session) {
-
   try {
 
-    $response=(new FacebookRequest(
-      $session, 'GET', '/me/photos?limit=24'
-    ))->execute();
-    //$object = $response->getGraphObject(GraphUser::className())->asArray();
+    /* get user name, etc. */
+    $response=(new FacebookRequest( $session, 'GET', '/me?fields=id,name' ))->execute();
+    $result["profile"] = json_decode($response->getRawResponse(), true);
+
+    /* get photos */
+    $response=(new FacebookRequest( $session, 'GET', '/me/photos?limit=24' ))->execute();
     $arrayResult = json_decode($response->getRawResponse(), true);
     $arrayResult = $arrayResult['data'];
     $result["row"] = array();
@@ -31,15 +35,11 @@ if($session) {
         array_push($result["thumb"],end($row["images"])["source"]);
     }
 
-
   } catch(FacebookRequestException $e) {
-
     echo "Exception occured, code: " . $e->getCode();
     echo " with message: " . $e->getMessage();
-
   }
-  if( isset($_GET['result']) ) echo json_encode($result);
-
+  echo json_encode($result);
 }
 
 ?>
