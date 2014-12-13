@@ -21,10 +21,16 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
-				sectionsColor: ['#ECEFF5'],
-				anchors: ['login'],
-				scrollOverflow: true,
-				css3: true
+				'sectionsColor': ['#ECEFF5','#cccccc'],
+				'anchors': ['login', 'album'],
+				'scrollOverflow': true,
+				'afterLoad': function(anchorLink, index){
+					if(index == 2){
+						console.log("index == 2");
+						fb.fadeIn(0);
+					}
+				},
+				'css3': true
 			});
 			$('#fb-login .form').form({
 				username: { identifier: 'fb-username', rules: [{type: 'empty'},] },
@@ -43,35 +49,40 @@
 <div id="header"> <h2>header</h2> </div>
 <div id="footer"> footer </div>
 <div id="fullpage">
-	<div class="section" id="login-sec">
-		<div class="slide" id="fb-login">
-			<div class="ui huge form">
-				<div class="field">
-					<div class="input">
-						<input type="text" name="username" id="fb-username" placeholder="username" />
+	<div class="center section" id="login-sec">
+		<div class="ui two column middle aligned relaxed fitted stackable grid">
+			<div class="center aligned column" id="fb-login">
+				<div class="ui huge form">
+					<div class="field">
+						<div class="input">
+							<input type="text" name="username" id="fb-username" placeholder="username" />
+						</div>
+						<div class="input">
+							<input type="password" name="password" id="fb-password" placeholder="password" />
+						</div>
 					</div>
-					<div class="input">
-						<input type="password" name="password" id="fb-password" placeholder="password" />
-					</div>
+					<div class="ui large facebook button submit"><i class="facebook icon"></i>Login to Facebook</div>
 				</div>
-				<div class="ui large facebook button submit"><i class="facebook icon"></i>Login to Facebook</div>
 			</div>
-		<div class="slide" id="nas-login">
-			<div class="ui huge form">
-				<div class="field">
-					<div class="input">
-						<input type="text" name="username" id="nas-username" placeholder="username" />
+			<div class="ui vertical divider"> And </div>
+			<div class="center aligned column" id="nas-login">
+				<div class="ui huge form">
+					<div class="field">
+						<div class="input">
+							<input type="text" name="username" id="nas-username" placeholder="username" />
+						</div>
+						<div class="input">
+							<input type="password" name="password" id="nas-password" placeholder="password" />
+						</div>
 					</div>
-					<div class="input">
-						<input type="password" name="password" id="nas-password" placeholder="password" />
-					</div>
+					<div class="ui large linkedin button submit"><i class="cloud icon"></i>Login to your NAS</div>
 				</div>
-				<div class="ui large linkedin button submit"><i class="cloud icon"></i>Login to your NAS</div>
 			</div>
 		</div>
 	</div>
-	<div class="sction">
-		XD
+	<div class="section">
+		<div class="" id="fb-album">
+		</div>
 	</div>
 </div>
 </body>

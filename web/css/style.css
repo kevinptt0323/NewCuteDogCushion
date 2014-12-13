@@ -4,9 +4,11 @@ body {
 h2, h3 { margin: 10px 0; }
 h5 { margin: 15px 0; }
 
-.section{
-	text-align:center;
+.section {
 	padding: 0 55px;
+}
+.center.section{
+	text-align: center;
 }
 
 #header, #footer {
@@ -33,19 +35,25 @@ h5 { margin: 15px 0; }
 	color: #999;
 }
 
-#login-sec .form {
-	width: 400px;
-	margin: auto;
+#login-sec .two.column {
+	position: relative;
 }
 
-@media screen and (max-width: 767px) {
-
-body {
-	font-size: 10pt;
+#fb-album {
+	position: absolute;
+	top: 60px;
 }
-.foods img {
-	width: 100%;
+#fb-album .photo.thumbnail {
+	float: left;
+	display: none;
+	min-width: 150px;
+	min-height: 150px;
+	width: 11vw;
+	height: 11vw;
+	border: 1px solid #fff;
+	background: #333;
+	color: #fff;
+	font-size: 30pt;
+	line-height: 9vw;
+	text-align: center;
 }
-
-}
-
