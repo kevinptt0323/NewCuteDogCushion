@@ -1,7 +1,7 @@
 <?php
     function upload($file_path)
     {
-        $target=('http://192.168.1.26/adv,/cgi-bin/file_upload-cgic');
+        $target=('http://ncdc.nctucs.net/adv,/cgi-bin/file_upload-cgic');
         $data=array(
             'rformat' => "extjs",
             'target_path' => "/public",
