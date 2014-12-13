@@ -27,7 +27,8 @@
 				'afterLoad': function(anchorLink, index){
 					if(index == 2){
 						console.log("index == 2");
-						fb.fadeIn(0);
+						if( fb.isLogin )
+							fb.fadeIn(0);
 					}
 				},
 				'css3': true,
