@@ -9,9 +9,10 @@ use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 
 FacebookSession::setDefaultApplication('370119299832796','84b61fca561954af21e3c7b7faba135b');
- $session = new FacebookSession('CAAFQnx1kG9wBAKlexZBgcbtvGwz8jEYbTNB6qL9ihnU3Vs5N3g8uG9IUCQsNJ2hdQGuQZA2GfzW4TPw4M3drUTBUbyfPgZAFGamNHk30Q0DNsa5terQqh4VSHBEOgYrSVEcgkUbbz18vatvoxy9GrWaDYFHCC9KVrUeQrLaTGCFWwmaIHOO4jJWCgIJ8WFo1lnZAG65RZCJLBDLmC84x5');
-$result=array();
-$thumbnail=array();
+ $session = new FacebookSession('CAAFQnx1kG9wBAEwoIc9VJONaS61De5VSnBHNbbZCBaTdSWSp4n0wutn8psUL8HcdRKhobXZAO59XZCeMZARAGJyWZC46am42fahdBfA78mxLFbQGyEZBY8juMLBagSTtEH9KkZCiOiwy47fb6H09JoZCHIC09fQmlxoVZAyUM7NdEUQR2JrZADrZAC7CjmsxJYP8jpEZAwUwxoWBHZAY9EUsO1NvL');
+$result = array(
+  "username"=>"蔡維哲jizz"
+);
 
 if($session) {
 
@@ -22,10 +23,12 @@ if($session) {
     ))->execute();
     //$object = $response->getGraphObject(GraphUser::className())->asArray();
     $arrayResult = json_decode($response->getRawResponse(), true);
-    $arrayResult=$arrayResult['data'];
+    $arrayResult = $arrayResult['data'];
+    $result["row"] = array();
+    $result["thumb"] = array();
     foreach($arrayResult as $row){
-        array_push($result,$row["images"][0]["source"]);
-        array_push($thumbnail,end($row["images"])["source"]);
+        array_push($result["row"],$row["images"][0]["source"]);
+        array_push($result["thumb"],end($row["images"])["source"]);
     }
 
 
@@ -35,16 +38,7 @@ if($session) {
     echo " with message: " . $e->getMessage();
 
   }
-function result($data)
-{
-    echo json_encode($data);
-}
-function thumbnail($data)
-{
-    echo json_encode($data);
-}
-if(isset($_GET['result'])) result($result);
-else if(isset($_GET['thumb'])) thumbnail($thumbnail);
+  if( isset($_GET['result']) ) echo json_encode($result);
 
 }
 
