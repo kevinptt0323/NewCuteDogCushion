@@ -7,12 +7,17 @@
 <?php
 function login($username,$password)
 {
-    $Rq= new HttpRequest("http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?password=$password&username=$username",HttpRequest::METH_POST);
-    try{
-            $Rq -> send();
-    }catch (HttpException $ex)
-    {
-        echo $ex;
-    }
+    $url=curl_init("http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?password=$password&username=$username");
+    $respense=curl_exec($url);
+    echo $response;
+    curl_close($url);
+    #$Rq= new HttpRequest("http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?password=$password&username=$username",HttpRequest::METH_POST);
+ #   try{
+  #      $Rq -> send();
+        
+   # }catch (HttpException $ex)
+   # {
+   #     echo $ex;
+   # }
 }
 ?>
