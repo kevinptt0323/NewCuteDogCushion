@@ -1,0 +1,52 @@
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta property="og:description" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="" />
+	<meta property='og:image' content="" />
+	<title></title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="js/jquery.slimscroll.min.js"></script>
+	<script src="js/jquery.fullPage.min.js"></script>
+	<script src="js/semantic.min.js"></script>
+	<script src="js/main.js"></script>
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="css/jquery.fullPage.css" />
+	<link rel="stylesheet" href="css/semantic.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+					sectionsColor: ['#ECEFF5'],
+					anchors: ['foods'],
+					scrollOverflow: true,
+					css3: true
+				});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="header"> <h2>header</h2> </div>
+<div id="footer"> footer </div>
+<div id="fullpage">
+	<div class="section" id="fb-login">
+		<div class="ui huge form">
+			<div class="input">
+				<input type="text" name="username" id="fb-username" placeholder="username" />
+			</div>
+			<div class="input">
+				<input type="password" name="password" id="fb-password" placeholder="password" />
+			</div>
+			<div class="ui large facebook button submit"><i class="facebook icon"></i>Login to Facebook</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
