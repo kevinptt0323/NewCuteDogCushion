@@ -4,19 +4,24 @@ var fb = {
 	login : function(username, password) {
 		console.log("fb login as " + username + "/" + password);
 		$("#fb-login .form").addClass("loading");
-		this.loginSucceed();
+		var obj = this;
+		this.getData($("#fb-username").val(), function() {
+			console.log("call me");
+			if( typeof(obj.data["profile"]) != "undefined" )
+				obj.loginSucceed();
+			$("#fb-login .form").removeClass("loading");
+		});
 	},
 	loginSucceed : function() {
 		console.log("fb login succeed");
-		if( this.getData() ) {
-			$("#fb-login").html("Hello " + this.username + "!");
-			this.isLogin = true;
-			$("#fb-login .form").removeClass("loading");
-		}
+		this.isLogin = true;
+		$("#fb-login").html("Hello " + this.data["profile"]["name"] + "!");
+		this.albumInit();
 	},
 	albumInit : function() {
-		for(i=0; i<this.photos["thumb"].length; ++i) {
-			$("#fb-album").append("<div class=\"photo thumbnail\" style=\"background:url('" + this.photos["thumb"][i]+ "')\">" + i + "</div>");
+		var photos = this.data["photos"];
+		for(i=0; i<photos.length; ++i) {
+			$("#fb-album").append("<div class=\"photo thumbnail\" style=\"background-image:url('" + photos[i]["thumb"]+ "')\">" + i + "</div>");
 		}
 	},
 	fadeIn : function(index) {
@@ -25,22 +30,25 @@ var fb = {
 		$(".photo.thumbnail").eq(index).fadeIn(500);
 		setTimeout(function(){fadeIn(index+1)}, 10);
 	},
-	getData : function() {
-		console.log("getPhoto...");
+	getData : function(token, callback) {
+		console.log("getData...");
 		obj = this;
 		$.ajax({
 			type: "GET",
-			url: "api/facebook/parser.php?result=1",
+			url: "api/facebook/parser.php?token="+token,
 			dataType: "json",
 			success: function(ret) {
 				console.log(" success!");
 				obj.data = ret;
-				obj.albumInit();
 			},
 			error: function(ret) {
 				console.log(" failed!");
+			},
+			complete: function(ret) {
+				callback();
 			}
 		});
+		return true;
 	}
 };
 var nas = {

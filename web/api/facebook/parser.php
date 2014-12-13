@@ -28,11 +28,9 @@ if($session) {
     $response=(new FacebookRequest( $session, 'GET', '/me/photos?limit=24' ))->execute();
     $arrayResult = json_decode($response->getRawResponse(), true);
     $arrayResult = $arrayResult['data'];
-    $result["row"] = array();
-    $result["thumb"] = array();
+    $result["photos"] = array();
     foreach($arrayResult as $row){
-        array_push($result["row"],$row["images"][0]["source"]);
-        array_push($result["thumb"],end($row["images"])["source"]);
+      array_push( $result["photos"] , array("raw"=>$row["images"][0]["source"], "thumb"=>end($row["images"])["source"]));
     }
 
   } catch(FacebookRequestException $e) {
