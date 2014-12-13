@@ -1,0 +1,70 @@
+body {
+	font-size: 14pt;
+	font-family: "Droid Sans", "Source Han Sans Regular", iLihei, "微軟正黑體", sans-serif;
+}
+
+h2, h3 { margin: 10px 0; }
+h5 { margin: 15px 0; }
+
+.section{
+	text-align:center;
+	padding: 0 55px;
+}
+
+#header, #footer {
+	position: fixed;
+	display: block;
+	width: 100%;
+	margin: 0px;
+	padding: 0 30px;
+	background: #333;
+	z-index: 9;
+	color: #f2f2f2;
+}
+
+#header {
+	top: 0px;
+	text-shadow: 2px 2px 2px #000;
+}
+#footer { bottom: 0px; }
+#footer a { color: #f2f2f2; }
+#footer #author {
+	position: absolute;
+	right: 130px;
+	top: 0;
+	color: #999;
+}
+.foods {
+	padding: 60px 0;
+}
+.foods h1 {
+	text-shadow: 1px 1px 1px #999;
+}
+.foods img {
+	max-height: 300px;
+	margin-bottom: 20px;
+}
+.foods .field label {
+	text-align: left;
+}
+div.sum {
+	text-align: left;
+}
+.ui.table th {
+	text-align: center;
+}
+#clear-btn {
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+
+body {
+	font-size: 10pt;
+}
+.foods img {
+	width: 100%;
+}
+
+}
+
