@@ -7,41 +7,28 @@ use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
-//use Facebook\FacebookRedirectLoginHelper;
 
-$appId="370119299832796";
-$appSecret="af025cd05a4c16d3cb941b77f84f973a";
-$redirect_url="http://mushr00m.nctucs.net/~daniel/ncdc/auth.php";
-FacebookSession::setDefaultApplication('370119299832796','af025cd05a4c16d3cb941b77f84f973a');
+FacebookSession::setDefaultApplication('370119299832796','84b61fca561954af21e3c7b7faba135b');
+ $session = new FacebookSession('CAAFQnx1kG9wBACCn39rpRoiw6e2Ole0mNJcxTyGAgAJdfAQ4Ree9DpQpk1GnTH96gglKL1IwqZAG7AVwOyp6B8KVY9NEldJkoRLD4D3PQrW2ZBATw1cbrNyRwB8y1DFxLY7UcjwZAQpvkaZB5CvJybkkWlXvavqhxuyfDBsIib3A0aLEPlA8j42GPsafBFtj34ZAg1yjswWAwoOUT5mZAQ');
 
-//$helper = new FacebookRedirectLoginHelper($redirect_url,$appId,$appSecret);
+if($session) {
 
-$session=new FacebookSession('CAACEdEose0cBAFs2cbMixZAiwfplSFZBrPwHOZBepajKggbHhvu3r8SPruZAvFk5TaJRQyqQ3b4zLT0f4WfT9u10dEZANiWbhdLJNZAZBtoZAOe9kPtsj9iLwExtQNaIPeO5JyEDOnHnsvkUaaUcQHQZBClMaua2plHuEQMR3ZCg6liZAI8k2ZBLkLswA16MeQZA3uo0RhjIOumLlE7S7ggrqJS4U');
+  try {
 
+    $me = (new FacebookRequest(
+      $session, 'GET', '/me/photos'
+    ))->execute()->getGraphObject(GraphUser::className());
 
-/*try {
-  $session = $helper->getSessionFromRedirect();
-} catch( FacebookRequestException $ex ) {
-  // When Facebook returns an error
-} catch( Exception $ex ) {
-  // When validation fails or other local issues
+    echo var_dump($me);
+    echo "Name: " . $me->getName();
+
+  } catch(FacebookRequestException $e) {
+
+    echo "Exception occured, code: " . $e->getCode();
+    echo " with message: " . $e->getMessage();
+
+  }
+
 }
- */
-if($session){
-    try {
-        $me = (new FacebookRequest(
-            $session, 'GET', '/me'
-        ))->execute()->getGraphObject(GraphUser::className());
-        echo $me->getName();
-    } catch (FacebookRequestException $e) {
-        echo $e;
-        // The Graph API returned an error
-    } catch (\Exception $e) {
-        echo $e;
-        // Some other error occurred
-    }
-}/*else{
-    echo '<a href="' . $helper->getLoginUrl() . '">Login with Facebook</a>';
-}*/
 
 ?>
