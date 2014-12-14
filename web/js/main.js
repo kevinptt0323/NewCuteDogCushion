@@ -69,6 +69,8 @@ var nas = {
 	loginSucceed : function() {
 		console.log("fb login succeed");
 		$("#fb-login").html("Hello Kevin!");
+	},
+	upload : function() {
 	}
 };
 $(function() {
@@ -78,6 +80,11 @@ $(function() {
 	$("#nas-login .submit").on('click', function() {
 		nas.login($("#nas-username").val(), $("#nas-password").val());
 	});
+	$(".backup.button")
+		.popup({transition: "fade up"});
+		.on('click', function() {
+			nas.upload();
+		});
 	$(".sidebar").sidebar('setting', {'transition':'overlay'});
 	$(".sidebar-btn").on('click', function() {
 		$(".sidebar").sidebar('toggle');
