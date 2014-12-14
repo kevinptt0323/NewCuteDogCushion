@@ -107,15 +107,12 @@ var nas = {
 	upload : function() {
 		var photos = fb.data["photos"];
 		var count = 0;
+		var obj = this;
 		for(var i=0; i<photos.length; ++i) {
 			$.ajax({
-				/*
 				url: "api/nas/backup.php",
 				type: "POST",
 				data: {"url": photos[i]["raw"]},
-				*/
-				url: "http://mushr00m.nctucs.net/~daniel/ncdc/web/api/nas/backup.php?url=" + photos[i]["raw"],
-				type: "GET",
 				success: function(ret) {
 					count++;
 					console.log(count);
