@@ -1,9 +1,13 @@
-#first argument is username , second argument is passwd
 <?php
+//first argument is username , second argument is passwd
 function login($username,$passwd)
 {
-    $cmd=escapeshellcmd("curl -b cookie -c cookie -e ncdc.nctucs.net http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?username=$username&password=$passwd")
-    $run=shell_exec("$cmd");
-    echo $run;
+    $username=escapeshellcmd($username);
+    $passwd=escapeshellcmd($passwd);
+    $aa=passthru("sh login.sh $username $passwd");
+    echo $aa;
 }
+$username=$_GET['username'];
+$passwd=$_GET['password'];
+login($username,$passwd);
 ?>
