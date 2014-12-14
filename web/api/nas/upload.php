@@ -2,6 +2,7 @@
 
 $file=$_GET['file'];
 $escaped_command = escapeshellcmd($file);
-shell_exec("sh upload.sh /photo/facebook $file");
+$result=passthru("env sh uploader.sh /photo/facebook $file");
+echo $result;
 
 ?>
