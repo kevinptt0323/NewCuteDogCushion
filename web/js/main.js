@@ -108,6 +108,8 @@ var nas = {
 		var photos = fb.data["photos"];
 		var count = 0;
 		var obj = this;
+		$("#backup-progress").fadeIn();
+		$("#fb-album").dimmer("show");
 		for(var i=0; i<photos.length; ++i) {
 			$.ajax({
 				url: "api/nas/backup.php",
@@ -116,6 +118,8 @@ var nas = {
 				success: function(ret) {
 					count++;
 					console.log(count);
+					console.log("percent: "+(1.0*count/photos.length));
+					$("#backup-progress").progress({ percent: 1.0*count/photos.length });
 					if( count==photos.length )
 						obj.finish();
 				},
@@ -125,6 +129,8 @@ var nas = {
 		}
 	},
 	finish : function() {
+		$("#backup-progress").fadeOut();
+		$("#fb-album").dimmer("hide");
 		alert("finish");
 	}
 };

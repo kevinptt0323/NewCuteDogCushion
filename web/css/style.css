@@ -101,3 +101,12 @@ h5 { margin: 15px 0; }
 	z-index: 10;
 	display: none;
 }
+#backup-progress {
+	position: absolute;
+	width: 800px;
+	left: 50%;
+	margin-left: -400px;
+	top: 50%;
+	display: none;
+	z-index: 10000;
+}
