@@ -66,7 +66,23 @@ var nas = {
 	loginSucceed : function() {
 		console.log("nas login succeed");
 		this.isLogin = true;
-		$("#nas-login").html("Hello " + this.username + "!");
+		$("#nas-login").html("<div>Hello " + this.username + "!</div>");
+		$("#nas-login").append("<div class=\"ui button nas-logout\">Logout</div>");
+		$(".backup.button")
+			.fadeIn()
+			.on('click', function() {
+				nas.upload();
+			})
+			.popup({transition: "fade up"});
+		var obj = this;
+		$(".nas-logout.button").on('click', function() { obj.logout(); });
+	},
+	logout : function() {
+		this.isLogin = false;
+		$.ajax({
+			url: "api/nas/logout.php",
+			type: "GET"
+		});
 	},
 	getData : function(username, password, callback) {
 		var obj = this;
@@ -75,8 +91,9 @@ var nas = {
 			type: "POST",
 			data: {"username": username, "password": password},
 			success: function(ret) {
-				console.log("success: " + ret);
-				if( ret == "success" )
+				json = JSON.parse(ret);
+				console.log("success: " + json["result"]);
+				if( json["result"] == "success" )
 					obj.username = username;
 			},
 			error: function(ret) {
@@ -88,7 +105,7 @@ var nas = {
 		});
 	},
 	upload : function() {
-		var photos = this.data["photos"];
+		var photos = fb.data["photos"];
 		for(var i=0; i<photos.length; ++i) {
 			$.ajax({
 				url: "api/nas/upload.php?url="+photos[i]["raw"],
@@ -108,11 +125,6 @@ $(function() {
 	$("#nas-login .submit").on('click', function() {
 		nas.login($("#nas-username").val(), $("#nas-password").val());
 	});
-	$(".backup.button")
-		.popup({transition: "fade up"})
-		.on('click', function() {
-			nas.upload();
-		});
 	$(".sidebar").sidebar('setting', {'transition':'overlay'});
 	$(".sidebar-btn").on('click', function() {
 		$(".sidebar").sidebar('toggle');

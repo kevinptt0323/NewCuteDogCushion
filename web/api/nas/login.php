@@ -5,7 +5,7 @@ function login($username,$passwd)
     $username=escapeshellcmd($username);
     $passwd=escapeshellcmd($passwd);
     $aa=passthru("sh login.sh $username $passwd");
-    echo $aa;
+    //echo $aa;
 }
 if( !isset($_POST['username']) || !isset($_POST['password']) )
     die();
