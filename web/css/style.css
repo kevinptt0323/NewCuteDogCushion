@@ -95,7 +95,7 @@ h5 { margin: 15px 0; }
 	z-index: 5;
 }
 .backup.button {
-	position: absolute;
+	position: fixed;
 	right: 10px;
 	top: 15px;
 	z-index: 10;
