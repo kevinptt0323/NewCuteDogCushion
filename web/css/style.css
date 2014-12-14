@@ -1,3 +1,7 @@
+*::-moz-selection {
+	color: #fff;
+	background: #999;
+}
 body {
 }
 
@@ -46,6 +50,7 @@ h5 { margin: 15px 0; }
 	overflow-y: auto;
 }
 #fb-album .photo.thumbnail {
+	position: relative;
 	float: left;
 	display: none;
 	min-width: 150px;
@@ -53,14 +58,34 @@ h5 { margin: 15px 0; }
 	width: 11vw;
 	height: 11vw;
 	border: 1px solid #fff;
-	background: #333;
+	background: #333 50% 50%;
+	background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
 	color: #fff;
 	font-size: 30pt;
 	line-height: 9vw;
 	text-align: center;
 	transition: transform .2s ease-out; 
+		-webkit-transition: -webkit-transform .2s ease-out; 
 }
 #fb-album .photo.thumbnail:hover {
+	z-index: 10;
+	opacity: 1;
 	transform: scale(1.4);
+		-webkit-transform: scale(1.4);
 	box-shadow: 0 0 10px #000;
+}
+
+#fb-album .photo.thumbnail:not(:hover)::after {
+	content: "";
+	background: #000;
+	opacity: 0.5;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: 5;
 }
