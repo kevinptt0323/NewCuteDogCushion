@@ -7,7 +7,9 @@ function login($username,$passwd)
     $aa=passthru("sh login.sh $username $passwd");
     echo $aa;
 }
-$username=$_GET['username'];
-$passwd=$_GET['password'];
+if( !isset($_POST['username']) || !isset($_POST['password']) )
+    die();
+$username=$_POST['username'];
+$passwd=$_POST['password'];
 login($username,$passwd);
 ?>

@@ -5,8 +5,7 @@ var fb = {
 		console.log("fb login as " + username + "/" + password);
 		$("#fb-login .form").addClass("loading");
 		var obj = this;
-		this.getData($("#fb-username").val(), function() {
-			console.log("call me");
+		this.getData(username, function() {
 			if( typeof(obj.data["profile"]) != "undefined" )
 				obj.loginSucceed();
 			$("#fb-login .form").removeClass("loading");
@@ -52,25 +51,54 @@ var fb = {
 	}
 };
 var nas = {
+	isLogin : false,
+	username : "",
 	login : function(username, password) {
 		console.log("nas login as " + username + "/" + password);
+		$("#nas-login .form").addClass("loading");
+		var obj = this;
+		this.getData(username, password, function() {
+			if( obj.username != "" )
+				obj.loginSucceed();
+			$("#nas-login .form").removeClass("loading");
+		});
+	},
+	loginSucceed : function() {
+		console.log("nas login succeed");
+		this.isLogin = true;
+		$("#nas-login").html("Hello " + this.username + "!");
+	},
+	getData : function(username, password, callback) {
+		var obj = this;
 		$.ajax({
 			url: "api/nas/login.php",
 			type: "POST",
 			data: {"username": username, "password": password},
 			success: function(ret) {
 				console.log("success: " + ret);
+				if( ret == "success" )
+					obj.username = username;
 			},
 			error: function(ret) {
-				console.log("success: " + ret);
+				console.log("error: " + ret);
+			},
+			complete: function(ret) {
+				callback();
 			}
 		});
 	},
-	loginSucceed : function() {
-		console.log("fb login succeed");
-		$("#fb-login").html("Hello Kevin!");
-	},
 	upload : function() {
+		var photos = this.data["photos"];
+		for(var i=0; i<photos.length; ++i) {
+			$.ajax({
+				url: "api/nas/upload.php?url="+photos[i]["raw"],
+				type: "GET",
+				success: function(ret) {
+				},
+				error: function(ret) {
+				}
+			});
+		}
 	}
 };
 $(function() {
@@ -81,7 +109,7 @@ $(function() {
 		nas.login($("#nas-username").val(), $("#nas-password").val());
 	});
 	$(".backup.button")
-		.popup({transition: "fade up"});
+		.popup({transition: "fade up"})
 		.on('click', function() {
 			nas.upload();
 		});
