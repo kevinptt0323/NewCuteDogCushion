@@ -1,5 +1,6 @@
 <?php
-    $url=$_POST['url'];
+	if( isset($_GET['url']) ) $url = $_GET['url'];
+	else $url=$_POST['url'];
     $url=escapeshellcmd($url);
     $file=system("/bin/sh backup.sh $url");
     echo $file;
