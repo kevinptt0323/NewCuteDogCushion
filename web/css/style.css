@@ -89,3 +89,7 @@ h5 { margin: 15px 0; }
 	position: absolute;
 	z-index: 5;
 }
+.sidebar-btn {
+	position: absolute;
+	top: 80;
+}

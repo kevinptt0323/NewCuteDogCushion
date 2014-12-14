@@ -78,4 +78,8 @@ $(function() {
 	$("#nas-login .submit").on('click', function() {
 		nas.login($("#nas-username").val(), $("#nas-password").val());
 	});
+	$(".sidebar").sidebar('setting', {'transition':'overlay'});
+	$(".sidebar-btn").on('click', function() {
+		$(".sidebar").sidebar('toggle');
+	});
 });
