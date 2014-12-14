@@ -45,6 +45,7 @@ h5 { margin: 15px 0; }
 }
 
 #fb-album {
+	position: relative;
 	height: 100%;
 	padding: 50px;
 	overflow-y: auto;
@@ -88,4 +89,11 @@ h5 { margin: 15px 0; }
 	right: 0;
 	position: absolute;
 	z-index: 5;
+}
+.backup.button {
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	z-index: 10;
+	display: none;
 }
