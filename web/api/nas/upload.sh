@@ -15,7 +15,7 @@ while getopts ":l:p:t:f:" flag ; do
             target="${OPTARG}"
             ;;
         f)
-            file=${OPTARG}
+            file="${OPTARG}"
             ;;
         \?)
             echo "Invalid option -$OPTARG"
@@ -30,7 +30,7 @@ done
 login(){
     login=$1
     password=$2
-    curl -b cookie -c cookie -e ncdc.nctucs.net "http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?username=$login&password=$password"
+    curl -v -b cookie -c cookie -e ncdc.nctucs.net "http://ncdc.nctucs.net/adv,/cgi-bin/weblogin.cgi?username=$login&password=$password"
 }
 upload(){
     target=$1
