@@ -1,5 +1,5 @@
 <?php
-    $url=$_GET['url'];
+    $url=$_POST['url'];
     $url=escapeshellcmd($url);
     $file=system("/bin/sh backup.sh $url");
     echo $file;
